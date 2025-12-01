@@ -1,6 +1,7 @@
 
 import { useState } from 'react'
 import type { PasswordRule, ValidationResponse } from './types/types';
+import { Lock } from 'lucide-react';
 
 const PASSWORD_RULES: PasswordRule[] = [
   { label: "At least 8 characters", test: (p) => p.length >= 8 },
@@ -51,20 +52,28 @@ function App() {
 
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Password Validator</h1>
-        <p className="text-gray-600 mb-6">Check if your password meets security requirements</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-6 p-8 rounded-xl shadow-lg bg-white">
+        <div className="text-center space-y-2">
+          <h1 className="text-3xl font-bold text-gray-800">Password Validator</h1>
+          <p className="text-gray-600">Check if your password meets security requirements</p>
+        </div>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleValidate();
+          }}
+          className="space-y-5"
+          >
+          <div className="relative">
+            <Lock
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                size={18}
+              />
+          </div>
+        </form>
       </div>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleValidate();
-        }}
-        className="space-y-5">
-
-      </form>
     </div>
   )
 }
