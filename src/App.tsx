@@ -1,10 +1,14 @@
 
 import { useState } from 'react'
-import type { PasswordRule } from './types/types';
+import type { PasswordRule, ValidationResponse } from './types/types';
 
 
 function App() {
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [result, setResult] = useState<ValidationResponse | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
  
 
