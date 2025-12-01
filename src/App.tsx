@@ -124,6 +124,13 @@ function App() {
               )}
             </AnimatePresence>
           </div>
+          <button
+            type="submit"
+            disabled={!password || loading}
+            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed"
+          >
+            {loading ? 'Validating...' : 'Validate Password'}
+          </button>
         </form>
       </div>
     </div>
