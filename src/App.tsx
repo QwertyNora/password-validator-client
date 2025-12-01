@@ -33,7 +33,7 @@ function App() {
   const handleValidate = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/password/validate', {
+      const response = await fetch('http://localhost:5094/api/password/validate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ function App() {
               onFocus={() => setIsFocused(true)}
               onBlur={() => setTimeout(() => setIsFocused(false), 200)}
               placeholder="Enter your password"
-              className="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+              className="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
             <button
               type="button"
@@ -131,6 +131,40 @@ function App() {
           >
             {loading ? 'Validating...' : 'Validate Password'}
           </button>
+
+          {result && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className={`p-4 rounded-lg ${
+                result.isValid
+                  ? 'bg-green-50 border border-green-200'
+                  : 'bg-red-50 border border-red-200'
+              }`}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">{result.isValid ? '✅' : '❌'}</span>
+                <h3
+                  className={`font-semibold ${
+                    result.isValid ? 'text-green-800' : 'text-red-800'
+                  }`}
+                >
+                  {result.isValid ? 'Password is Valid!' : 'Password is Invalid'}
+                </h3>
+              </div>
+
+              {!result.isValid && result.errors.length > 0 && (
+                <ul className="space-y-1 mt-3">
+                  {result.errors.map((error, index) => (
+                    <li key={index} className="text-sm text-red-700 flex items-start gap-2">
+                      <span className="text-red-500 mt-0.5">•</span>
+                      <span>{error}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </motion.div>
+          )}
         </form>
       </div>
     </div>
