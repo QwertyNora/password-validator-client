@@ -2,16 +2,6 @@
 import { useState } from 'react'
 import type { PasswordRule, ValidationResponse } from './types/types';
 
-
-function App() {
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [result, setResult] = useState<ValidationResponse | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-
- 
-
 const PASSWORD_RULES: PasswordRule[] = [
   { label: "At least 8 characters", test: (p) => p.length >= 8 },
   { label: "At least one uppercase letter", test: (p) => /[A-Z]/.test(p) },
@@ -22,6 +12,15 @@ const PASSWORD_RULES: PasswordRule[] = [
     test: (p) => /[!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?]/.test(p),
   },
 ];
+
+
+function App() {
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [result, setResult] = useState<ValidationResponse | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+
 
   const handleValidate = async () => {
     setLoading(true);
