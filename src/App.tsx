@@ -21,6 +21,12 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  const validated = PASSWORD_RULES.map((rule) => ({
+    label: rule.label,
+    valid: rule.test(password),
+  }));
+
+  const allPasswordValid = validated.every((item) => item.valid);
 
   const handleValidate = async () => {
     setLoading(true);
