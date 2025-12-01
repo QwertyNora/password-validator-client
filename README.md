@@ -1,73 +1,170 @@
-# React + TypeScript + Vite
+# Password Validator Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, interactive React application for validating password strength with real-time feedback and API integration.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   ✨ **Real-time validation** - Live feedback as you type
+-   🎨 **Modern UI** - Built with React, TypeScript, and Tailwind CSS
+-   🔒 **Comprehensive rules** - Checks length, uppercase, lowercase, numbers, and special characters
+-   👁️ **Password visibility toggle** - Show/hide password functionality
+-   🎭 **Smooth animations** - Powered by Motion (Framer Motion)
+-   🔌 **API integration** - Validates passwords against a backend API
+-   ♿ **Accessible** - ARIA labels and keyboard navigation support
 
-## React Compiler
+## Password Requirements
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+The validator checks for the following criteria:
 
-## Expanding the ESLint configuration
+-   At least 8 characters
+-   At least one uppercase letter
+-   At least one lowercase letter
+-   At least one number
+-   At least one special character (`!@#$%^&*()_+-=[]{};':"\|,.<>/?`)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+-   **React 19** - UI framework
+-   **TypeScript** - Type-safe development
+-   **Vite** - Fast build tool and dev server
+-   **Tailwind CSS 4** - Utility-first styling
+-   **Motion** (Framer Motion) - Animation library
+-   **Lucide React** - Icon library
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+-   Node.js (v16 or higher)
+-   npm or yarn
+-   Backend API running on `http://localhost:5094` (see API Integration section)
+
+## Getting Started
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/QwertyNora/password-validator-client.git
+
+# Navigate to project directory
+cd password-validator-client
+
+# Install dependencies
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Start development server
+npm run dev
 ```
+
+The application will open at `http://localhost:5173`
+
+### Build for Production
+
+```bash
+# Build the project
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+### Linting
+
+```bash
+# Run ESLint
+npm run lint
+```
+
+## API Integration
+
+The application expects a backend API endpoint at:
+
+```
+POST http://localhost:5094/api/password/validate
+```
+
+### Request Body
+
+```json
+{
+    "password": "YourPassword123!"
+}
+```
+
+### Response Format
+
+```json
+{
+    "isValid": true,
+    "errors": []
+}
+```
+
+Or for invalid passwords:
+
+```json
+{
+    "isValid": false,
+    "errors": ["Password must be at least 8 characters", "Password must contain at least one uppercase letter"]
+}
+```
+
+## Project Structure
+
+```
+password-validator-client/
+├── src/
+│   ├── App.tsx              # Main application component
+│   ├── main.tsx             # Application entry point
+│   ├── index.css            # Global styles
+│   ├── types/
+│   │   └── types.ts         # TypeScript type definitions
+│   └── assets/              # Static assets
+├── public/                  # Public assets
+├── index.html               # HTML template
+├── package.json             # Dependencies and scripts
+├── vite.config.ts           # Vite configuration
+├── tsconfig.json            # TypeScript configuration
+└── eslint.config.js         # ESLint configuration
+```
+
+## TypeScript Types
+
+The project uses strict TypeScript typing:
+
+```typescript
+type PasswordRule = {
+    label: string;
+    test: (password: string) => boolean;
+};
+
+type ValidationResponse = {
+    isValid: boolean;
+    errors: string[];
+};
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Author
+
+QwertyNora
+
+## Acknowledgments
+
+-   Built as part of the SALT (School of Applied Technology) program
+-   Icons provided by [Lucide](https://lucide.dev/)
+-   Animations powered by [Motion](https://motion.dev/)
