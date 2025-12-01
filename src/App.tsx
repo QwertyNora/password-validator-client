@@ -157,7 +157,7 @@ function App() {
                 <ul className="space-y-1 mt-3">
                   {result.errors.map((error, index) => (
                     <li key={index} className="text-sm text-red-700 flex items-start gap-2">
-                      <span className="text-red-500 mt-0.5">•</span>
+                      <span className="text-red-500">•</span>
                       <span>{error}</span>
                     </li>
                   ))}
