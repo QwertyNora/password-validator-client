@@ -53,8 +53,8 @@ function App() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-6 p-8 rounded-xl shadow-lg bg-white">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-200 flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-6 p-8 rounded-xl shadow-md bg-white">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold text-gray-800">Password Validator</h1>
           <p className="text-gray-600">Check if your password meets security requirements</p>
