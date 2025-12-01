@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import type { PasswordRule, ValidationResponse } from './types/types';
-import { Lock } from 'lucide-react';
+import { Eye, EyeOff, Lock } from 'lucide-react';
 
 const PASSWORD_RULES: PasswordRule[] = [
   { label: "At least 8 characters", test: (p) => p.length >= 8 },
@@ -80,6 +80,14 @@ function App() {
               placeholder="Enter your password"
               className="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
+              aria-label="Toggle password visibility"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
           </div>
         </form>
       </div>
