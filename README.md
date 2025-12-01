@@ -165,6 +165,5 @@ QwertyNora
 
 ## Acknowledgments
 
--   Built as part of the SALT (School of Applied Technology) program
 -   Icons provided by [Lucide](https://lucide.dev/)
 -   Animations powered by [Motion](https://motion.dev/)
