@@ -1,7 +1,8 @@
 
 import { useState } from 'react'
 import type { PasswordRule, ValidationResponse } from './types/types';
-import { Eye, EyeOff, Lock } from 'lucide-react';
+import { CheckCircle, Eye, EyeOff, Lock, XCircle } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 
 const PASSWORD_RULES: PasswordRule[] = [
   { label: "At least 8 characters", test: (p) => p.length >= 8 },
@@ -88,6 +89,40 @@ function App() {
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
+
+            <AnimatePresence>
+              {isFocused && password.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                  className={`absolute left-0 mt-2 w-full rounded-lg shadow-lg p-4 border text-sm z-10 ${
+                    allPasswordValid
+                      ? 'border-green-500 bg-green-50'
+                      : 'border-gray-200 bg-white'
+                  }`}
+                >
+                  <ul className="space-y-2">
+                    {validated.map((item) => (
+                      <li
+                        key={item.label}
+                        className={`flex items-center gap-2 transition-colors ${
+                          item.valid ? 'text-green-700' : 'text-gray-500'
+                        }`}
+                      >
+                        {item.valid ? (
+                          <CheckCircle size={16} className="text-green-600" />
+                        ) : (
+                          <XCircle size={16} className="text-red-500" />
+                        )}
+                        {item.label}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </form>
       </div>
