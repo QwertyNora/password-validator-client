@@ -23,6 +23,27 @@ const PASSWORD_RULES: PasswordRule[] = [
   },
 ];
 
+  const handleValidate = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost:5000/api/password/validate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      const data = await response.json();
+      setResult(data);
+    } catch (error) {
+      console.error('Error validating password:', error);
+      alert('Failed to validate password. Make sure the API is running!');
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -30,6 +51,15 @@ const PASSWORD_RULES: PasswordRule[] = [
         <h1 className="text-3xl font-bold text-gray-800 mb-2">Password Validator</h1>
         <p className="text-gray-600 mb-6">Check if your password meets security requirements</p>
       </div>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleValidate();
+        }}
+        className="space-y-5">
+
+      </form>
     </div>
   )
 }
