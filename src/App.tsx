@@ -143,7 +143,7 @@ function App() {
               }`}
             >
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">{result.isValid ? '✅' : '❌'}</span>
+                <span className="text-lg">{result.isValid ? '✅' : '❌'}</span>
                 <h3
                   className={`font-semibold ${
                     result.isValid ? 'text-green-800' : 'text-red-800'
